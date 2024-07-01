@@ -107,12 +107,12 @@ def setup_posefix_split(split_for_research):
 
 
 @st.cache_data
-def precompute_posescript_pose_features(data_version, split_for_research, _model):
+def precompute_posescript_pose_features(data_version, split_for_research, _model, tokenizer_name):
     
     batch_size = 32
     
     # create dataset
-    dataset = data.PoseScript(version=data_version, split=split_for_research, tokenizer_name=None)
+    dataset = data.PoseScript(version=data_version, split=split_for_research, tokenizer_name=tokenizer_name)
     data_loader = torch.utils.data.DataLoader(
         dataset, sampler=None, shuffle=False,
         batch_size=batch_size,

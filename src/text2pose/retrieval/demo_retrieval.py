@@ -50,7 +50,8 @@ split_for_research = cols_query[0].selectbox('Split:', tuple(available_splits), 
 
 # precompute features
 dataIDs = demo.setup_posescript_split(split_for_research)
-pose_dataIDs, poses_features = demo.precompute_posescript_pose_features(data_version_poses_collection, split_for_research, model)
+pose_dataIDs, poses_features = demo.precompute_posescript_pose_features(data_version_poses_collection, split_for_research, model, tokenizer_name)
+
 text_dataIDs, text_features = demo.precompute_text_features(data_version_annotations, split_for_research, model, tokenizer_name)
 
 # define query input interface: example selection

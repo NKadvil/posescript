@@ -28,7 +28,7 @@ GENERAL_EXP_OUTPUT_DIR = MAIN_DIR + '/experiments'
 ################################################################################
 
 POSEFIX_LOCATION = MAIN_DIR + '/data/PoseFix/posefix_release'
-POSESCRIPT_LOCATION = MAIN_DIR + '/data/PoseScript/posescript_release'
+POSESCRIPT_LOCATION = MAIN_DIR + '/data/posescript_release_v2/posescript_release'
 POSEMIX_LOCATION = MAIN_DIR + '/data/posemix'
 
 version_suffix = "_100k" # to be used for pipeline-related data (coords, rotation change, babel labels)
@@ -50,7 +50,7 @@ PID_NAN = -99999 # pose fake IDs, used for empty poses
 
 ### pose data ------------------------------------------------------------------
 
-AMASS_FILE_LOCATION = MAIN_DIR + f"/data/AMASS/{POSE_FORMAT}/"
+AMASS_FILE_LOCATION = MAIN_DIR + f"/../datasets/AMASS/{POSE_FORMAT}/"
 supported_datasets = {"AMASS":AMASS_FILE_LOCATION}
 
 BABEL_LOCATION = MAIN_DIR + "/data/BABEL/babel_v1.0_release"

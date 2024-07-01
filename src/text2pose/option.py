@@ -9,6 +9,7 @@
 
 import os
 import argparse
+import torch
 
 import text2pose.config as config
 
@@ -87,6 +88,7 @@ def get_args_parser():
     parser.add_argument('--saving_ckpt_step', default=10000, type=int, help='number of epochs before creating a persistent checkpoint')    
     parser.add_argument('--log_step', default=20, type=int, help='number of batchs before printing and recording the logs')
 
+    parser.add_argument('--specify_cuda_device', default=0, type=int, help='specify a cuda device to run on')
     return parser
 
 
@@ -163,6 +165,21 @@ def get_output_dir(args):
 
     return os.path.join(config.GENERAL_EXP_OUTPUT_DIR, args.subdir, architecture_details, dataset_details, loss_details, training_details, f'seed{args.seed}')
 
+
+def get_device(args):
+    """
+    Get the cuda\cpu running device
+    """
+    if not torch.cuda.is_available():
+        device=torch.device('cpu')
+    else:
+        if args.specify_cuda_device >= torch.cuda.device_count():
+            print("Warning: Specified cuda device ID is greater than the number of available GPUs, reverting to default device")
+            device = torch.device('cuda:0')
+        else:
+            device = torch.device('cuda:{}'.format(args.specify_cuda_device))
+
+    return device
 
 if __name__=="__main__":
     # return the complete model path based on the provided arguments

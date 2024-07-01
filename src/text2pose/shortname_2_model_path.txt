@@ -1,0 +1,6 @@
+ret_distilbert_dataPSA2ftPSH2    /home/nadav/research_project/posescript/experiments/posescript_ckpts/ret_distilbert_dataPSA2ftPSH2/checkpoint_best.pth
+modret_distilbert_dataPFAftPFH    /home/nadav/research_project/posescript/experiments/posescript_ckpts/modret_distilbert_dataPFAftPFH/checkpoint_best.pth
+gen_distilbert_dataPSA2ftPSH2    /home/nadav/research_project/posescript/experiments/posescript_ckpts/gen_distilbert_dataPSA2ftPSH2/checkpoint_best.pth
+b_gen_distilbert_dataPFAftPFH    /home/nadav/research_project/posescript/experiments/posescript_ckpts/b_gen_distilbert_dataPFAftPFH/checkpoint_best.pth
+capgen_CAtransfPSA2H2_dataPSA2ftPSH2    /home/nadav/research_project/posescript/experiments/posescript_ckpts/capgen_CAtransfPSA2H2_dataPSA2ftPSH2/checkpoint_best.pth
+modgen_CAtransfPFAHPP_dataPFAftPFH    /home/nadav/research_project/posescript/experiments/posescript_ckpts/modgen_CAtransfPFAHPP_dataPFAftPFH/checkpoint_best.pth

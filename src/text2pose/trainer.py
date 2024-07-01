@@ -23,7 +23,7 @@ from torchvision.utils import make_grid
 from human_body_prior.body_model.body_model import BodyModel
 
 import text2pose.config as config
-from text2pose.option import get_output_dir
+from text2pose.option import get_output_dir, get_device
 from text2pose.fid import FID
 
 
@@ -37,7 +37,7 @@ class GenericTrainer():
 
 		# define setting
 		self.args = args
-		self.device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+		self.device = get_device(args)
 		cudnn.benchmark = True
 
 		# fix the seed for reproducibility
