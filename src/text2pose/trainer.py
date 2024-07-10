@@ -26,6 +26,7 @@ import text2pose.config as config
 from text2pose.option import get_output_dir, get_device
 from text2pose.fid import FID
 
+import wandb
 
 ################################################################################
 
@@ -261,7 +262,6 @@ class GenericTrainer():
 					for i, t in enumerate(texts):
 						self.log_writer.add_text(f'{sstr}/{log_name}_{i}', t, epoch_1000x)
 
-
 	def add_data_to_metric_logger(self, metric_logger, sstr, scalars):
 		"""
 		scalars: list of tuples (variable name, value) or (variable name, dict{sub_variable_name:sub_variable_value})
@@ -285,14 +285,21 @@ class GenericTrainer():
 		self.init_model()
 		self.init_optimizer()
 		self.init_other_training_elements()
-		
+
 		# load previous ckpt & log parameter names
 		self.start_or_resume_training()
 		self.print_trainable_params()
 
+		# nadav_wip - wandb_logging
+		if self.args.log_with_wandb:
+			wandb.tensorboard.patch(root_logdir=self.args.output_dir)
+			wandb_run = wandb.init(config=vars(self.args), sync_tensorboard=True, entity=self.args.wandb_entity_name,
+								   project=self.args.wandb_project_name, name=self.args.wandb_run_name)
+			wandb.run.log_code(".")
+
 		# init tensorboard
 		self.log_writer = SummaryWriter(log_dir=self.args.output_dir)
-	
+
 		# start training process
 		start_time = time.time()
 		for epoch in range(self.start_epoch, self.args.epochs): 
@@ -315,6 +322,9 @@ class GenericTrainer():
 			log_stats.update(**val_stats)
 			with open(os.path.join(self.args.output_dir, "log.txt"), mode="a", encoding="utf-8") as f:
 				f.write(json.dumps(log_stats) + "\n")
+
+		if self.args.log_with_wandb:
+			wandb_run.finish()
 
 		total_time = time.time() - start_time
 		total_time_str = str(datetime.timedelta(seconds=int(total_time)))

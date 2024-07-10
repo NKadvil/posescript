@@ -89,6 +89,12 @@ def get_args_parser():
     parser.add_argument('--log_step', default=20, type=int, help='number of batchs before printing and recording the logs')
 
     parser.add_argument('--specify_cuda_device', default=0, type=int, help='specify a cuda device to run on')
+
+    # wandb logging
+    parser.add_argument('--log_with_wandb', action='store_false', help='log the run using wandb')
+    parser.add_argument('--wandb_entity_name', default='kadviln', type=str, help='name of the wandb entity')
+    parser.add_argument('--wandb_project_name', default='debug_runs', type=str, help='name of the wandb project')
+    parser.add_argument('--wandb_run_name', default=None, type=str, help='name of the wandb run')
     return parser
 
 
